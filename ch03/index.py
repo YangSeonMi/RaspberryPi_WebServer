@@ -6,6 +6,8 @@ app = Flask(__name__)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
 
+GPIO.setwarning(false)
+
 @app.route("/")
 def home():
     return render_template("index.html")
