@@ -2,11 +2,10 @@ from flask import Flask, request, render_template
 import RPi.GPIO as GPIO
 import db_model
 
+GPIO.setwarnings(False)
 app = Flask(__name__)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
-
-GPIO.setwarning(false)
 
 @app.route("/")
 def home():
