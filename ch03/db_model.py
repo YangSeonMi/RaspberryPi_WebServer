@@ -1,6 +1,6 @@
 import pymysql
 
-conn = pymysql.connect(host='localhost', user='계정', password='q1w2e3', db='study')
+conn = pymysql.connect(host='localhost', user='YangSeonMi', password='q1w2e3', db='study')
 cur = conn.cursor() #SQL 문을 실행하거나 실행된 결과를 돌려받는 통로
 
 def add_status(status):

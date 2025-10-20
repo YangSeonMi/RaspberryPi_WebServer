@@ -1,12 +1,11 @@
-const on = document.getElementById("ON");
-const off = document.getElementById("OFF");
+const img = document.getElementById("image");
 
 function ON_click() {
-    on.style.opacity = 1;
-    off.style.opacity = 0;
+    img.src="../static/on.png"
+	location.href='http://10.150.0.243:5000/on'
 }
 
 function OFF_click() {
-    on.style.opacity = 0;
-    off.style.opacity = 1;
+    img.src = "../static/off.png"
+location.href='http://10.150.0.243:5000/off'
 }
