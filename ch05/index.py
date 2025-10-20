@@ -21,7 +21,7 @@ def setAngle(angle):
 
 @app.route('/')
 def home():
-    return reder_template("index.html")
+    return render_template("index.html")
 
 @app.route('/api/angle', methods=['POST'])
 def control_servo():
