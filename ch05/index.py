@@ -1,18 +1,33 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, jsonify
 import RPi.GPIO as GPIO
 from time import sleep
 
 GPIO.setwarnings(False)
 app = Flask(__name__)
+
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT, initial=GPIO.LOW)
+
+def setAngle(angle):
+    pwm = GPIO.PWM(16, 50)  # 핀 16, 50Hz
+    pwm.start(0)
+    duty = angle / 18 + 2
+    GPIO.output(16, True)
+    pwm.ChangeDutyCycle(duty)
+    sleep(0.5)
+    GPIO.output(16, False)
+    pwm.ChangeDutyCycle(0)
+    pwm.stop()
 
 @app.route('/api/angle', methods=['POST'])
 def control_servo():
     data = request.get_json()
-    angle = data.get('angle')  # POST 요청에서 'angle' 값을 가져옴
+    angle = data.get('angle')
     if angle is not None:
-        setAngle(int(angle))  # 서보 모터 각도 설정
-        return jsonify({'message': 'angle set to {}'.format(angle)})
+        setAngle(int(angle))
+        return jsonify({'message': f'angle set to {angle}'})
     else:
         return jsonify({'message': 'fail! check your parameter'})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
