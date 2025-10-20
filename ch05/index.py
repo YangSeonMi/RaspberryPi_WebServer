@@ -19,6 +19,10 @@ def setAngle(angle):
     pwm.ChangeDutyCycle(0)
     pwm.stop()
 
+@app.route('/')
+def home():
+    return reder_template("index.html")
+
 @app.route('/api/angle', methods=['POST'])
 def control_servo():
     data = request.get_json()
